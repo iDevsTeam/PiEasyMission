@@ -13,44 +13,58 @@ namespace PiEasyMissionWeb.Controllers
 {
     public class BidController : Controller
     {
-        BidService ise = null;
+        BidService bs = null;
         SkillService sk = null;
        // MemberService ms = null;
         
         public BidController()
         {
-            ise = new BidService();
+            bs = new BidService();
         }
         // GET: Bid
         public ActionResult Index()
         {
-            var l = ise.getAllBid();
-            return View(l);
+            List<BidModels> list = new List<BidModels>();
+            if (ModelState.IsValid)
+            {
+                foreach (var item in bs.getAllBid())
+                {
+                    BidModels PVM = new BidModels();
+
+                    PVM.BidId = item.BidId;
+                    PVM.StartDate = item.StartDate;
+                    PVM.EndDate = item.EndDate;
+                    PVM.Category = item.Category;
+                    PVM.City = item.City;
+                    PVM.Description = item.Description;
+                    PVM.Type = item.Type;
+
+
+                    list.Add(PVM);
+                }
+
+                return View(list);
+            }
+            return View(list);
         }
 
         // GET: Bid/Details/5
         public ActionResult Details(int id)
         {
-            var Bid = ise.getAllBid();
-            List<Bid> lpm = new List<Bid>();
-            foreach (var pm in Bid)
+            Bid p = bs.GetById(id);
+            BidModels pm = new BidModels
+
             {
-                lpm.Add(new Bid
-                {
-                    Type = pm.Type,
-                    Category = pm.Category,
-                    Description = pm.Description,
-                    City = pm.City
+                Description = p.Description,
+                Type = p.Type,
+                Category = p.Category,
+                EndDate = p.EndDate,
+                StartDate = p.StartDate,
+                City = p.City
+            };
 
-                });
-                //recherche
-                //if (!String.IsNullOrEmpty(searchString))
-                //{
-                //    lpm = lpm.Where(m => m.Type.Contains(searchString)).ToList();
-                //}
-            }
 
-            return View(lpm);
+            return View(pm);
         }
 
         // GET: Bid/Create
@@ -65,63 +79,98 @@ namespace PiEasyMissionWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                ise.createBid(b);
+                Bid p = new Bid
+                {
+                    Type = b.Type,
+                    Description = b.Description,
+                    Category = b.Category,
+                    EndDate = b.EndDate,
+                    StartDate = b.StartDate,
+                    City = b.City,
+                    SkillName = b.SkillName,
+                    MemberId = 7,
+                    SkillId = 1
 
-                return RedirectToAction("Index");
+                };
+                bs.createBid(p);
+                bs.Commit();
             }
 
 
-            else
 
-                return View();
+            return RedirectToAction("Index");
         }
 
         // GET: Bid/Edit/5
         public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Bid c = ise.getBidById(id);
-            if (c == null)
-            {
-                return HttpNotFound();
-            }
+            Bid p = bs.GetById(id);
 
-            return View(c);
+            BidModels pm = new BidModels();
+
+
+            pm.Description = p.Description;
+            pm.Category = p.Category;
+            pm.Type = p.Type;
+            pm.StartDate = p.StartDate;
+            pm.EndDate = p.EndDate;
+            pm.City = p.City;
+            pm.SkillName = p.SkillName;
+
+            return View(pm);
         }
 
         // POST: Bid/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Bid b)
+        public ActionResult Edit(int id , BidModels collection)
         {
-            if (ModelState.IsValid)
+            try
             {
-                ise.updateBid(b);
+                Bid p = bs.GetById(id);
+                // p.BidId = collection.BidId;
+                p.StartDate = collection.StartDate;
+                p.EndDate = collection.EndDate;
+                p.Description = collection.Description;
+                p.SkillName = collection.SkillName;
+
+                bs.updateBid(p);
                 return RedirectToAction("Index");
+
             }
-            return View(b);
+            catch (Exception)
+            {
+                return RedirectToAction("Edit", "Bid");
+
+            }
         }
 
         // GET: Bid/Delete/5
         public ActionResult Delete(int id)
         {
-            ise.deleteBidById(id);
-            var hs = ise.getAllBid();
-            return RedirectToAction("index", hs);
+            return View();
         }
 
         // POST: Bid/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id,FormCollection cl)
         {
             try
             {
-                // TODO: Add delete logic here
+                Bid p = bs.getBidById(id);
+                BidModels pm = new BidModels
 
-                return RedirectToAction("Index");
+                {
+                    Description = p.Description,
+                    Type = p.Type,
+                    Category = p.Category,
+                    EndDate = p.EndDate,
+                    StartDate = p.StartDate,
+                    City = p.City
+                };
+
+                bs.deleteBid(p);
+                bs.Commit();
+                return RedirectToAction("index");
             }
             catch
             {
@@ -130,14 +179,14 @@ namespace PiEasyMissionWeb.Controllers
         }
         public ActionResult OrderByName()
         {
-            IEnumerable<Bid> Bids = ise.getAllBid();
+            IEnumerable<Bid> Bids = bs.getAllBid();
 
             var Bid = from c in Bids
                        orderby c.Type ascending
                        select c;
             return View(Bid);
         }
-      /*  public ActionResult getBidBySkills()
+        public ActionResult getBidBySkills()
         {
             IEnumerable<Skill> skills = sk.getAllSkill();
             IEnumerable<Bid> bids = bs.getAllBid();
@@ -148,7 +197,7 @@ namespace PiEasyMissionWeb.Controllers
                        on c.SkillName equals b.SkillName
                         select c;
             return View(skill);
-        }*/
+        }
 
         /*  public ActionResult getMemberBySkill()
           {

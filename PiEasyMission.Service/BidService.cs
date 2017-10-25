@@ -59,11 +59,11 @@ namespace PiEasyMission.Service.Repositories
             myUnit.Commit();
         }
 
-        //public async Task<List<Bid>> FindAllAsync(Expression<Func<Bid, bool>> Bid)
-        //{
-        //    return myUnit.getRepository<Bid>().FindAllAsync(Bid.Name);
+        public List<Bid> findBidBySkill(string Skill)
+        {
+            return (GetMany(c => c.SkillName.ToLower().Contains(Skill)).ToList());
 
-        //}
+        }
 
     }
 }

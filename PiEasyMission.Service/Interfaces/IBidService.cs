@@ -19,7 +19,6 @@ namespace PiEasyMission.Service.Interfaces
         void deleteBid(Bid i);
 
         void deleteBidById(int id);
-        //Task<List<Bid>> FindAllAsync(Expression<Func<Bid, bool>> Bid);
-
+        List<Bid> findBidBySkill(string Skill);
     }
 }

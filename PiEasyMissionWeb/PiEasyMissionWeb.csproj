@@ -253,6 +253,11 @@
     <Content Include="Views\Skill\Create.cshtml" />
     <Content Include="Views\Skill\Edit.cshtml" />
     <Content Include="Views\Skill\Delete.cshtml" />
+    <Content Include="Views\Bid\Index.cshtml" />
+    <Content Include="Views\Bid\Details.cshtml" />
+    <Content Include="Views\Bid\Create.cshtml" />
+    <Content Include="Views\Bid\Edit.cshtml" />
+    <Content Include="Views\Bid\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

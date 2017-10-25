@@ -21,9 +21,10 @@ namespace PiEasyMissionWeb.Models
        
         public string Description { get; set; }
         public string City { get; set; }
+        public string SkillName { get; set; }
 
 
 
-       // public virtual User user { get; set; }
+        // public virtual User user { get; set; }
     }
 }
