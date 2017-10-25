@@ -54,12 +54,14 @@
     <Compile Include="Interfaces\IClaimService.cs" />
     <Compile Include="Interfaces\IEventService.cs" />
     <Compile Include="Interfaces\IForumService.cs" />
+    <Compile Include="Interfaces\IMemberService.cs" />
     <Compile Include="Interfaces\ISkillService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BidService.cs" />
     <Compile Include="Repositories\ClaimService.cs" />
     <Compile Include="Repositories\EventService.cs" />
     <Compile Include="Repositories\ForumService.cs" />
+    <Compile Include="Repositories\MemberService.cs" />
     <Compile Include="Repositories\SkillService.cs" />
   </ItemGroup>
   <ItemGroup>
