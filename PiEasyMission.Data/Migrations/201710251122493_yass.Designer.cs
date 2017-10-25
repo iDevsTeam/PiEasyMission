@@ -7,13 +7,13 @@ namespace PiEasyMission.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-beta1-60406")]
-    public sealed partial class Easy1 : IMigrationMetadata
+    public sealed partial class yass : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Easy1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(yass));
         
         string IMigrationMetadata.Id
         {
-            get { return "201710221245394_Easy1"; }
+            get { return "201710251122493_yass"; }
         }
         
         string IMigrationMetadata.Source

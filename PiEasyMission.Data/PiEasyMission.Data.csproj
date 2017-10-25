@@ -62,17 +62,9 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\201710212342145_Easy.cs" />
-    <Compile Include="Migrations\201710212342145_Easy.Designer.cs">
-      <DependentUpon>201710212342145_Easy.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710221245394_Easy1.cs" />
-    <Compile Include="Migrations\201710221245394_Easy1.Designer.cs">
-      <DependentUpon>201710221245394_Easy1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710221259386_Easy2.cs" />
-    <Compile Include="Migrations\201710221259386_Easy2.Designer.cs">
-      <DependentUpon>201710221259386_Easy2.cs</DependentUpon>
+    <Compile Include="Migrations\201710251122493_yass.cs" />
+    <Compile Include="Migrations\201710251122493_yass.Designer.cs">
+      <DependentUpon>201710251122493_yass.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PiEasyMissionContext.cs" />
@@ -89,14 +81,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710212342145_Easy.resx">
-      <DependentUpon>201710212342145_Easy.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710221245394_Easy1.resx">
-      <DependentUpon>201710221245394_Easy1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710221259386_Easy2.resx">
-      <DependentUpon>201710221259386_Easy2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710251122493_yass.resx">
+      <DependentUpon>201710251122493_yass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

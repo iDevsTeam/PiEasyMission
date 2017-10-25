@@ -14,17 +14,20 @@ namespace PiEasyMission.Domain.Entities
         public string Type { get; set; }
         public string Category { get; set; }
 
-        // [Required]
-       // [DisplayFormat(DataFormatString = "{0=yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+       [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0=yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
-        //[Required]
-       // [DisplayFormat(DataFormatString = "{0=yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0=yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         public string City { get; set; }
+        public string SkillName { get; set; }
 
 
         public int? MemberId { get; set; } // nullable

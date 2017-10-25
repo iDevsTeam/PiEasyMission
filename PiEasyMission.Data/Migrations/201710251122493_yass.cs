@@ -3,16 +3,16 @@ namespace PiEasyMission.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Easy2 : DbMigration
+    public partial class yass : DbMigration
     {
         public override void Up()
         {
-            AlterColumn("dbo.Skills", "SkillName", c => c.String(nullable: false));
+            AddColumn("dbo.Members", "profilePhoto", c => c.Binary());
         }
         
         public override void Down()
         {
-            AlterColumn("dbo.Skills", "SkillName", c => c.String());
+            DropColumn("dbo.Members", "profilePhoto");
         }
     }
 }
