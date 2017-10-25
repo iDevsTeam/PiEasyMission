@@ -14,7 +14,9 @@ namespace PiEasyMissionWeb.Controllers
     public class BidController : Controller
     {
         BidService ise = null;
-        IUnitOfWork iuw = null;
+        SkillService sk = null;
+       // MemberService ms = null;
+        
         public BidController()
         {
             ise = new BidService();
@@ -135,5 +137,29 @@ namespace PiEasyMissionWeb.Controllers
                        select c;
             return View(Bid);
         }
+      /*  public ActionResult getBidBySkills()
+        {
+            IEnumerable<Skill> skills = sk.getAllSkill();
+            IEnumerable<Bid> bids = bs.getAllBid();
+
+
+            var skill = from c in skills
+                        join b in bids
+                       on c.SkillName equals b.SkillName
+                        select c;
+            return View(skill);
+        }*/
+
+        /*  public ActionResult getMemberBySkill()
+          {
+              IEnumerable<Member> members = ms.getAllMember();
+              IEnumerable<Skill> skills = sk.getAllSkill();
+              var member = from m in members
+                            join c in skills
+                            on m.skills equals c.SkillId
+                           select m;
+              return View(member);
+
+          }*/
     }
 }
