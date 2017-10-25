@@ -15,7 +15,7 @@ namespace PiEasyMissionWeb.Controllers
     {
         BidService bs = null;
         SkillService sk = null;
-       // MemberService ms = null;
+        MemberService ms = null;
         
         public BidController()
         {
@@ -98,7 +98,7 @@ namespace PiEasyMissionWeb.Controllers
 
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("getMemberBySkill");
         }
 
         // GET: Bid/Edit/5
@@ -157,16 +157,7 @@ namespace PiEasyMissionWeb.Controllers
             try
             {
                 Bid p = bs.getBidById(id);
-                BidModels pm = new BidModels
-
-                {
-                    Description = p.Description,
-                    Type = p.Type,
-                    Category = p.Category,
-                    EndDate = p.EndDate,
-                    StartDate = p.StartDate,
-                    City = p.City
-                };
+               
 
                 bs.deleteBid(p);
                 bs.Commit();
@@ -210,5 +201,23 @@ namespace PiEasyMissionWeb.Controllers
               return View(member);
 
           }*/
+
+        public IEnumerable<MemberModels> getMemberBySkill()
+        {
+            IEnumerable<Member> members = ms.getAllMember();
+            IEnumerable<Skill> skills = sk.getAllSkill();
+            IEnumerable<Bid> bids = bs.getAllBid();
+
+            var Skbid = skills.
+                Join(bids, u => u.SkillId, uir => uir.SkillId,
+               (u, uir) => new { u, uir }).
+               Join(members, r => r.uir.MemberId, ro => ro.MemberId, (r, ro) => new { r, ro }).
+               Select(m => new MemberModels
+               {
+                 skills = m.r.u.SkillName
+               });
+
+            return Skbid;
+        }
     }
 }

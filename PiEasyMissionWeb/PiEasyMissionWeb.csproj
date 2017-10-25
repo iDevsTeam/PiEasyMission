@@ -184,6 +184,7 @@
     <Compile Include="Models\BidModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MemberModels.cs" />
     <Compile Include="Models\SkillModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
