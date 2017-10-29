@@ -8,6 +8,8 @@ using PiEasyMission.Service.Repositories;
 using PiEasyMission.Domain.Entities;
 using PiEasyMission.Data.Infrastructure;
 using System.Net;
+using PagedList;
+
 
 namespace PiEasyMissionWeb.Controllers
 {
@@ -20,11 +22,15 @@ namespace PiEasyMissionWeb.Controllers
         public BidController()
         {
             bs = new BidService();
+            sk = new SkillService();
+            ms = new MemberService();
         }
         // GET: Bid
-        public ActionResult Index()
+        public ActionResult Index(/*int page = 1, int pageSize = 4*/)
         {
-            List<BidModels> list = new List<BidModels>();
+
+           List<BidModels> list = new List<BidModels>();
+            //PagedList<BidModels> model = new PagedList<BidModels>(list, page, pageSize);
             if (ModelState.IsValid)
             {
                 foreach (var item in bs.getAllBid())
@@ -60,6 +66,7 @@ namespace PiEasyMissionWeb.Controllers
                 Category = p.Category,
                 EndDate = p.EndDate,
                 StartDate = p.StartDate,
+                SkillName = p.SkillName,
                 City = p.City
             };
 
@@ -75,7 +82,7 @@ namespace PiEasyMissionWeb.Controllers
 
         // POST: Bid/Create ----------------AJOUT ----------------------------
         [HttpPost]
-        public ActionResult Create(Bid b)
+        public ActionResult Create(BidModels b)
         {
             if (ModelState.IsValid)
             {
@@ -89,16 +96,29 @@ namespace PiEasyMissionWeb.Controllers
                     City = b.City,
                     SkillName = b.SkillName,
                     MemberId = 7,
-                    SkillId = 1
+                  
 
                 };
                 bs.createBid(p);
                 bs.Commit();
+
             }
 
+           
+            List<MemberModels> md = new List<MemberModels>();
+            foreach (var item in bs.getMemberBySkill(b.SkillName))
+            {
+                MemberModels PVM = new MemberModels();
 
+                PVM.firstName = item.firstName;
+                PVM.lastName = item.lastName;
+                PVM.email = PVM.email;
+                PVM.skills = PVM.skills;
+                md.Add(PVM);
+            }
+            TempData["members"] = md;
 
-            return RedirectToAction("getMemberBySkill");
+            return RedirectToAction("Index","Member");
         }
 
         // GET: Bid/Edit/5
@@ -127,13 +147,14 @@ namespace PiEasyMissionWeb.Controllers
             try
             {
                 Bid p = bs.GetById(id);
-                // p.BidId = collection.BidId;
+                p.BidId = collection.BidId;
                 p.StartDate = collection.StartDate;
                 p.EndDate = collection.EndDate;
                 p.Description = collection.Description;
                 p.SkillName = collection.SkillName;
 
-                bs.updateBid(p);
+
+                bs.Update(p);
                 return RedirectToAction("Index");
 
             }
@@ -190,34 +211,21 @@ namespace PiEasyMissionWeb.Controllers
             return View(skill);
         }
 
-        /*  public ActionResult getMemberBySkill()
-          {
-              IEnumerable<Member> members = ms.getAllMember();
-              IEnumerable<Skill> skills = sk.getAllSkill();
-              var member = from m in members
-                            join c in skills
-                            on m.skills equals c.SkillId
-                           select m;
-              return View(member);
-
-          }*/
-
-        public IEnumerable<MemberModels> getMemberBySkill()
+       
+       
+             public ActionResult getMemberBySkill()
         {
-            IEnumerable<Member> members = ms.getAllMember();
-            IEnumerable<Skill> skills = sk.getAllSkill();
-            IEnumerable<Bid> bids = bs.getAllBid();
 
-            var Skbid = skills.
-                Join(bids, u => u.SkillId, uir => uir.SkillId,
-               (u, uir) => new { u, uir }).
-               Join(members, r => r.uir.MemberId, ro => ro.MemberId, (r, ro) => new { r, ro }).
-               Select(m => new MemberModels
-               {
-                 skills = m.r.u.SkillName
-               });
+            var b = from member1 in ms.getAllMember()
+                    from Bid1 in bs.getAllBid()
+                    where member1.MemberId == Bid1.MemberId
+                    where Bid1.SkillName == member1.Skills.Select(e => e.SkillName).First()
+                    select member1;
 
-            return Skbid;
+            return View(b);
         }
+       
+
     }
-}
+    }
+

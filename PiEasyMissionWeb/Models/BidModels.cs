@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PiEasyMission.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,15 +13,17 @@ namespace PiEasyMissionWeb.Models
         public int BidId { get; set; }
         public string Type { get; set; }
         public string Category { get; set; }
-
+        [DataType(DataType.Date)]
+        
         public DateTime StartDate { get; set; }
 
-      
+        [DataType(DataType.Date)]
+        
         public DateTime EndDate { get; set; }
 
        
         public string Description { get; set; }
-        public string City { get; set; }
+        public City City { get; set; }
         public string SkillName { get; set; }
 
 

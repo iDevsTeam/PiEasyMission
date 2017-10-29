@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Administrator.cs" />
+    <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Bid.cs" />
     <Compile Include="Entities\Claim.cs" />
     <Compile Include="Entities\Event.cs" />

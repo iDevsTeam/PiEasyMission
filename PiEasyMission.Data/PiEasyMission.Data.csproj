@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\CityConfiguration.cs" />
     <Compile Include="Configurations\BidConfiguration.cs" />
     <Compile Include="Configurations\ClaimConfiguration.cs" />
     <Compile Include="Configurations\EventConfiguration.cs" />
@@ -62,9 +63,9 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\201710252015158_Easy.cs" />
-    <Compile Include="Migrations\201710252015158_Easy.Designer.cs">
-      <DependentUpon>201710252015158_Easy.cs</DependentUpon>
+    <Compile Include="Migrations\201710282104396_bb.cs" />
+    <Compile Include="Migrations\201710282104396_bb.Designer.cs">
+      <DependentUpon>201710282104396_bb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PiEasyMissionContext.cs" />
@@ -81,8 +82,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710252015158_Easy.resx">
-      <DependentUpon>201710252015158_Easy.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710282104396_bb.resx">
+      <DependentUpon>201710282104396_bb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

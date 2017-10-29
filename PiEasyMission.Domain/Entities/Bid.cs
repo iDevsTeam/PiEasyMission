@@ -16,17 +16,17 @@ namespace PiEasyMission.Domain.Entities
 
        [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0=yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+       
         public DateTime StartDate { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0=yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+       
         public DateTime EndDate { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
-        public string City { get; set; }
+        public City City { get; set; }
         public string SkillName { get; set; }
 
 
@@ -34,8 +34,6 @@ namespace PiEasyMission.Domain.Entities
         [ForeignKey("MemberId")]
         public virtual Member member { get; set; }
 
-        public int? SkillId { get; set; } // nullable
-        [ForeignKey("SkillId")]
-        public virtual Skill skill { get; set; }
+      
     }
 }

@@ -32,6 +32,7 @@ namespace PiEasyMission.Data
             modelBuilder.Configurations.Add(new ClaimConfiguration());
             modelBuilder.Configurations.Add(new EventConfiguration());
             modelBuilder.Configurations.Add(new ForumConfiguration());
+            modelBuilder.Configurations.Add(new CityConfiguration());
         }
 
     }

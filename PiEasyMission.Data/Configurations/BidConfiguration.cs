@@ -19,14 +19,6 @@ namespace PiEasyMission.Data.Configurations
                 .HasForeignKey(m => m.MemberId)
                 .WillCascadeOnDelete(false);
 
-            //OneToMany  bid with skill
-
-            HasRequired(sk => sk.skill)
-               .WithMany(B => B.Bids)
-               .HasForeignKey(s => s.SkillId)
-               .WillCascadeOnDelete(false);
-
-
 
 
 

@@ -1,0 +1,44 @@
+﻿@model PiEasyMissionWeb.Models.BidModels
+ @{
+    ViewBag.Title = "Index";
+    
+    }
+
+
+<div style="float:left; margin:60px;">
+    <ul class="nospace group services">
+        <li class="btmspace-30 one">
+            <article>
+                <div>
+                    Type:   @Model.Type
+                </div>
+
+                <div>
+                    Start Date :  @Model.StartDate
+                </div>
+                <div>
+
+                    End Date : @Model.EndDate
+                </div>
+                <div>
+
+                    Description : @Model.Description
+                </div>
+                <div>
+
+                    City : @Model.City
+                </div>
+
+                <div>
+
+
+                    @Html.ActionLink("Edit", "Edit", new { id=Model.BidId }) |
+                    @Html.ActionLink("Details", "Details", new { id=Model.BidId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=Model.BidId })
+                </div>
+
+            </article>
+
+        </li>
+    </ul>
+</div>
